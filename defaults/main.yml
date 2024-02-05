@@ -1,0 +1,20 @@
+lxc_container: 
+node: 
+api_token_id: 
+api_token_secret: 
+api_user: root@pam
+api_password: 
+api_host: 
+password: 
+cores: 2
+onboot: false
+memory: 4096
+swap: 4096
+features:
+  - nesting=1
+hostname: 
+disk: 'local-lvm:8'
+netif: 
+ostemplate:
+pool: 
+pubkey: 

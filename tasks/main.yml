@@ -1,0 +1,38 @@
+- name: Copying the Container template
+  when: lxc_container is defined
+  copy:
+    src: "{{ lxc_container }}"
+    dest: /var/lib/vz/template/cache/
+  
+
+- name: Create Container on Proxmox
+  proxmox:
+    node: "{{ node }}"
+    api_user: "{{ api_user }}"
+    api_password: "{{ api_password }}"
+    api_host: "{{ api_host }}"
+    password: "{{ password }}"
+    cores: "{{ cores }}"
+    onboot: "{{ onboot }}"
+    disk: "{{ disk }}"
+    memory: "{{ memory }}"
+    hostname: "{{ hostname }}"
+    ostemplate: "{{ ostemplate }}"
+    pool: "{{ pool }}"
+    netif: "{{ netif }}"
+    pubkey: "{{ pubkey }}"
+    swap: "{{ swap }}"
+    features: "{{ features }}"
+    api_token_id: "{{ api_token_id }}"
+    api_token_secret: "{{ api_token_secret }}"
+  register: container_creation
+- name: start a container with hostname
+  proxmox:
+    api_user: "{{ api_user }}"
+    api_password: "{{ api_password }}"
+    api_host: "{{ api_host }}"
+    password: "{{ password }}"
+    node: "{{ node }}"
+    vmid: '{{ container_creation.vmid }}'
+    state: "started"
+
