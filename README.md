@@ -24,14 +24,22 @@ The role requires several variables to be defined, either in the playbook or in 
 *   `features`: Additional features or options for the container creation.
 *   `api_token_id`: (Optional) The API token ID for authentication (if using API token).
 *   `api_token_secret`: (Optional) The API token secret for authentication (if using API token).
+*   `lxc_container`: (Optional) Copy the LXC image from files. (if template is not present in Proxmox.)
 
 ## Example Playbook
 
 ```yaml
+# site.yml
 - hosts: proxmox_servers
   become: true
   roles:
-    - container
+    - proxmox_lxc 
   vars_files:
     - main.yml
 ```
+
+Replace the variable values with your specific configuration.
+
+## License
+
+This role is licensed under the MIT License.
